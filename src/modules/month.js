@@ -15,3 +15,7 @@ export const days = (month, year) => {
     const range = moment.range(moment([year, month]), monthEndDay(month, year))
     return Array.from(range.by('days'));
 }
+
+export const formatted = (month, year) => {
+    return moment([year, month]).format('MMMM YYYY');
+};

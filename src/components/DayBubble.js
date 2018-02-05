@@ -12,7 +12,7 @@ export const dayStyle = {
     textAlign: 'center',
     cursor: 'pointer',
     lineHeight: '36px',
-    transition: 'all 450ms cubic-bezier(0.15, 0.97, 0.37, 1.01)',        
+    transition: 'color 450ms cubic-bezier(0.15, 0.97, 0.37, 1.01)',        
     '&:hover': {
         color: 'white',
     },

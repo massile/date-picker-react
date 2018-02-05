@@ -18,7 +18,12 @@ const DatePicker = ({ value, format, name, onChange, classes }) => {
         <div className={classes.container}>
             <input type="text" value={ date.format(format) }/>
             <input type="text" name={name} value={ date.format('YYYY-MM-DD') }/>
-            <DatePickerAgenda onDayClick={day => onChange(day.format(format))} date={date} />
+            <DatePickerAgenda
+                onDayClick={day => onChange(day.format(format))}
+                onNextMonthClick={() => onChange(date.add(1, 'M').format(format))}
+                onPrevMonthClick={() => onChange(date.subtract(1, 'M').format(format))}
+                date={date}
+            />
         </div>
     );  
 };

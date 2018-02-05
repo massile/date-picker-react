@@ -3,6 +3,7 @@ import withStyle from 'react-jss';
 import DateHeader from './DateHeader';
 import WeekDays from './WeekDays';
 import DayBubble, { dayStyle } from './DayBubble';
+import MonthControls from './MonthControls';
 import * as Month from '../modules/month';
 
 const daySize = 41;
@@ -22,7 +23,7 @@ const style = {
     }
 };
 
-const DatePickerAgenda = ({ date, onDayClick, classes }) => {
+const DatePickerAgenda = ({ date, onDayClick, onNextMonthClick, onPrevMonthClick, classes }) => {
     const month = date.month();
     const year = date.format('YYYY');
     const dateFormatted = date.format('dddd DD MMM');
@@ -30,6 +31,11 @@ const DatePickerAgenda = ({ date, onDayClick, classes }) => {
     return (
         <div className={classes.datePicker}>
             <DateHeader year={year} dateFormatted={dateFormatted} />
+            <MonthControls
+                date={date}
+                onNextClick={onNextMonthClick}
+                onPrevClick={onPrevMonthClick}
+            />
             <WeekDays />
             <div className={classes.days}>
                 <div
