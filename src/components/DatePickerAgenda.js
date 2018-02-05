@@ -22,7 +22,7 @@ const style = {
     }
 };
 
-const DatePickerAgenda = ({ date, classes }) => {
+const DatePickerAgenda = ({ date, onDayClick, classes }) => {
     const month = date.month();
     const year = date.format('YYYY');
     const dateFormatted = date.format('dddd DD MMM');
@@ -38,7 +38,11 @@ const DatePickerAgenda = ({ date, classes }) => {
                 ></div>
                 {
                     Month.days(month, year).map((day, i) => (
-                        <DayBubble day={day} selected={day.unix() === date.unix()} />
+                        <DayBubble
+                            onClick={() => onDayClick(day)}
+                            day={day}
+                            selected={day.unix() === date.unix()}
+                        />
                     ))
                 }
             </div>

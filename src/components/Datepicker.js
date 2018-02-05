@@ -12,13 +12,13 @@ const style = {
     }
 };
 
-const DatePicker = ({ value, format, name, classes }) => {
+const DatePicker = ({ value, format, name, onChange, classes }) => {
     const date = moment(value, format);
     return (
         <div className={classes.container}>
             <input type="text" value={ date.format(format) }/>
             <input type="text" name={name} value={ date.format('YYYY-MM-DD') }/>
-            <DatePickerAgenda date={date} />
+            <DatePickerAgenda onDayClick={day => onChange(day.format(format))} date={date} />
         </div>
     );  
 };

@@ -49,8 +49,11 @@ const style = {
     }
 }
 
-const DayBubble = ({ selected, day, classes }) => (
-    <div className={selected ? classes.daySelected : classes.day}>
+const DayBubble = ({ selected, day, onClick, classes }) => (
+    <div
+        onClick={onClick}
+        className={selected ? classes.daySelected : classes.day}
+    >
         <span className={classes.bubble}></span>
         <span className={classes.bubbleText}>{ day.format('D') }</span>
     </div>
