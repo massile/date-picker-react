@@ -1,5 +1,6 @@
 import React from 'react';
 import withStyle from 'react-jss';
+import * as Month from '../modules/month';
 
 const headerHeight = 100;
 const daySize = 41;
@@ -39,13 +40,23 @@ const style = {
         float: 'left',
         width: daySize,
         textAlign: 'center',
+    },
+    days: {
+        margin: '14px',
+    },
+    day: {
+        width: daySize,
+        height: daySize,
+        float: 'left',
+        textAlign: 'center'
     }
 };
 
 const DatePickerAgenda = ({ date, classes }) => {
+    const month = date.month();
     const year = date.format('YYYY');
     const dateFormatted = date.format('dddd DD MMM');
-    
+
     return (
         <div className={classes.datePicker}>
             <header className={classes.header}>
@@ -62,6 +73,19 @@ const DatePickerAgenda = ({ date, classes }) => {
                         {day}
                     </div>
                 )) }
+            </div>
+            <div className={classes.days}>
+                <div
+                    className={classes.day}
+                    style={{ width: Month.weekStart(month, year) * daySize + 'px' }}
+                ></div>
+                {
+                    Month.days(month, year).map((day, i) => (
+                        <div className={classes.day}>
+                            {day.format('D')}
+                        </div>
+                    ))
+                }
             </div>
         </div>
     );
