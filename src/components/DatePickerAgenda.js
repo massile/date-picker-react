@@ -3,6 +3,7 @@ import withStyle from 'react-jss';
 import * as Month from '../modules/month';
 
 const headerHeight = 100;
+const themeColor = '#0097a7';
 const daySize = 41;
 const weekDays = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
 
@@ -16,7 +17,7 @@ const style = {
         boxShadow: '0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22)',
     },
     header: {
-        backgroundColor: '#0097a7',
+        backgroundColor: themeColor,
         color: 'white',
         padding: 20,
         height: headerHeight
@@ -45,10 +46,44 @@ const style = {
         margin: '14px',
     },
     day: {
+        position: 'relative',
         width: daySize,
         height: daySize,
         float: 'left',
-        textAlign: 'center'
+        textAlign: 'center',
+        cursor: 'pointer',
+        lineHeight: '36px',
+        transition: 'all 450ms cubic-bezier(0.15, 0.97, 0.37, 1.01)',        
+        '&:hover': {
+            color: 'white',
+        },
+        '&:hover $bubble': {
+            transform: 'scale(1)',
+            opacity: 0.6
+        }
+    },
+    daySelected: {
+        extend: 'day',
+        color: 'white',
+        '& $bubble': {
+            transform: 'scale(1)',
+            opacity: 1
+        }
+    },
+    bubble: {
+        position: 'absolute',
+        width: 36,
+        height: 36,
+        borderRadius: '50%',
+        background: themeColor,
+        top: 2,
+        left: 2,
+        transition: 'all 450ms cubic-bezier(0.15, 0.97, 0.37, 1.01)',
+        transform: 'scale(0)',
+        opacity: 0,
+    },
+    bubbleText: {
+        position: 'relative',
     }
 };
 
@@ -81,8 +116,9 @@ const DatePickerAgenda = ({ date, classes }) => {
                 ></div>
                 {
                     Month.days(month, year).map((day, i) => (
-                        <div className={classes.day}>
-                            {day.format('D')}
+                        <div className={date.unix() === day.unix() ? classes.daySelected : classes.day}>
+                            <span className={classes.bubble}></span>
+                            <span className={classes.bubbleText}>{ day.format('D') }</span>
                         </div>
                     ))
                 }
