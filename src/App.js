@@ -12,7 +12,12 @@ class App extends Component {
   
   render() {
     return (
-      <div>
+      <div style={{
+        position: 'absolute',
+        top: '25%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}>
         <DatePicker
           onChange={newDate => this.setState({ dateValue: newDate })}
           value={this.state.dateValue}
